@@ -16,7 +16,7 @@ API ini mengelola proses autentikasi, absensi karyawan, pengajuan request, dan m
 ---
 
 ## 🛠️ Teknologi yang Digunakan
-- **Framework:** Laravel **10.x**
+- **Framework:** Laravel **12.x**
 - **Bahasa Pemrograman:** PHP **8.2+**
 - **Database:** **MySQL** / MariaDB
 - **API:** RESTful API (JSON Response)
@@ -32,6 +32,7 @@ API ini mengelola proses autentikasi, absensi karyawan, pengajuan request, dan m
    cd presensi-backend
    composer install
    cp .env.example .env
+   ubah API_KEY di .env dengan api_key kamu
    php artisan key:generate
    php artisan migrate
    php artisan serve
