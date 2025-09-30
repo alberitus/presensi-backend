@@ -2,78 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'nik' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->withErrors([
+            'nik' => 'NIK atau password salah.',
+        ])->onlyInput('nik');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+
     public function index()
     {
-        return response()->json(User::all());
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nik' => 'required|unique:users',
-            'nama_lengkap' => 'required',
-            'division' => 'required',
-            'tanggal_masuk' => 'required|date',
-            'status_karyawan' => 'required',
-            'role' => 'required',
-            'password' => 'required|min:6',
-        ]);
-
-        $user = User::create([
-            'nik' => $request->nik,
-            'nama_lengkap' => $request->nama_lengkap,
-            'division' => $request->division,
-            'tanggal_masuk' => $request->tanggal_masuk,
-            'status_karyawan' => $request->status_karyawan,
-            'role' => $request->role,
-            'password' => bcrypt($request->password),
-        ]);
-
-        return response()->json($user, 201);
-    }
-
-    public function show($id)
-    {
-        $user = User::find($id);
-        if (!$user) return response()->json(['message' => 'User not found'], 404);
-        return response()->json($user);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $user = User::find($id);
-        if (!$user) return response()->json(['message' => 'User not found'], 404);
-
-        $request->validate([
-            'nik' => 'unique:users,nik,' . $id,
-            'tanggal_masuk' => 'date',
-            'password' => 'nullable|min:6',
-        ]);
-
-        $user->update(array_filter([
-            'nik' => $request->nik,
-            'nama_lengkap' => $request->nama_lengkap,
-            'division' => $request->division,
-            'tanggal_masuk' => $request->tanggal_masuk,
-            'status_karyawan' => $request->status_karyawan,
-            'role' => $request->role,
-            'password' => $request->password ? bcrypt($request->password) : null,
-        ]));
-
-        return response()->json($user);
-    }
-
-    public function destroy($id)
-    {
-        $user = User::find($id);
-        if (!$user) return response()->json(['message' => 'User not found'], 404);
-
-        $user->delete();
-        return response()->json(['message' => 'User deleted']);
+        $data = [
+            'users' => User::orderBy('nama_lengkap', 'desc')->get(),
+        ];
+        return view('master.users.index', $data);
     }
 }

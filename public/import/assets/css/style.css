@@ -1,0 +1,153 @@
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: 0;
+    width: 400px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: translate3d(100%, 0, 0);
+}
+
+.modal.right .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.right.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate3d(100%, 0, 0);
+}
+
+.modal.right.fade.show .modal-dialog {
+    transform: translate3d(0, 0, 0);
+}
+
+
+.dropdown-item.active {
+    background-color: #0e246894;
+    font-weight: bold;
+    color: #fff !important;
+    /* buat teks utama jadi putih */
+}
+
+.dropdown-item.active i {
+    color: #fff !important;
+    /* buat icon jadi putih */
+}
+
+.dropdown-item.active small {
+    color: #e0e0e0 !important;
+    /* buat category jadi abu terang */
+}
+
+.icon-profile {
+    font-size: 34px;
+    /* icon profile di topbar */
+}
+
+#dataTable th {
+    text-align: center;
+}
+
+.center-table {
+    text-align: center;
+}
+
+.wd-5 {
+    width: 5%;
+}
+
+.bg-attendance {
+    background-color: #1f2837 !important;
+}
+
+.bg-gradient-orange {
+    background-color: #e07816;
+    background-image: linear-gradient(180deg, #c06d1f 10%, #373840 100%);
+    background-size: cover;
+}
+
+.bg-danger-pudar {
+    background-color: rgba(220, 53, 69, 0.6) !important;
+    /* merah agak transparan */
+    color: #fff !important;
+    /* teks tetap putih */
+}
+
+.bg-warning-pudar {
+    background-color: rgba(255, 193, 7, 0.6) !important;
+    /* kuning agak transparan */
+    color: #fff !important;
+}
+
+.bg-success-pudar {
+    background-color: rgba(40, 167, 69, 0.6) !important;
+    /* hijau agak transparan */
+    color: #fff !important;
+}
+
+.color-switcher {
+    position: fixed;
+    bottom: 10px;
+    right: 80px;
+    z-index: 1050;
+}
+
+.color-switcher .main-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #0056d6;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.color-switcher .main-btn.rotate {
+    transform: rotate(180deg);
+}
+
+.color-switcher .color-options {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.color-switcher.active .color-options {
+    pointer-events: auto;
+}
+
+.color-switcher .color-btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}
+
+.color-switcher.active .color-btn {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.color-switcher .color-btn:nth-child(1) { transform: translate(-70px, -10px); }
+.color-switcher .color-btn:nth-child(2) { transform: translate(-50px, -50px); }
+.color-switcher .color-btn:nth-child(3) { transform: translate(-10px, -70px); }
+.color-switcher .color-btn:nth-child(4) { transform: translate(30px, -50px); }
+.color-switcher .color-btn:nth-child(5) { transform: translate(50px, -10px); }
+

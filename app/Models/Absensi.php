@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Absensi extends Model
 {
@@ -23,5 +24,11 @@ class Absensi extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeToday($query)
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        return $query->whereDate('tanggal', $today);
     }
 }
