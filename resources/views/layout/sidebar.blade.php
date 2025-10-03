@@ -14,7 +14,7 @@
         Data Presensi
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('index') }}">
+        <a class="nav-link {{ Request::is('attendance*') ? 'active' : '' }}" href="{{ route('attendance.index') }}">
             <i class="fas fa-chart-area"></i>
             <span>Riwayat Presensi</span>
         </a>

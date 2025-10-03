@@ -21,6 +21,10 @@ class Absensi extends Model
         'is_fake_gps',
     ];
 
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,5 +34,15 @@ class Absensi extends Model
     {
         $today = Carbon::now()->format('Y-m-d');
         return $query->whereDate('tanggal', $today);
+    }
+
+    public function getLokasiMasukMapUrlAttribute()
+    {
+        return "https://www.google.com/maps/search/?api=1&query=" . urlencode($this->lokasi_masuk);
+    }
+
+    public function getLokasiKeluarMapUrlAttribute()
+    {
+        return "https://www.google.com/maps/search/?api=1&query=" . urlencode($this->lokasi_keluar);
     }
 }
